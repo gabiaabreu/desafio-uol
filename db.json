@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Mônica",
+      "email": "monica_sousa@gmail.com",
+      "cpf": "10575137681",
+      "phone": "34983648372",
+      "status": 1
+    },
+    {
+      "id": 2,
+      "name": "Cebolinha",
+      "email": "cebola09@gmail.com",
+      "cpf": "23479118640",
+      "phone": "34990806617",
+      "status": 2
+    },
+    {
+      "status": 1,
+      "phone": "11887772222",
+      "cpf": "25150717088",
+      "email": "maga_li@gmail.com",
+      "name": "Magali",
+      "id": 3
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "11804710083",
+      "email": "te@gmail.com",
+      "name": "Teste",
+      "id": 4
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "gabi@gmail.com",
+      "name": "Alfredo",
+      "id": 5
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "eduarda.sousa@outlook.com",
+      "name": "Eduarda",
+      "id": 6
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "denisedobairro@limoeiro.com",
+      "name": "Denise",
+      "id": 7
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "pedro.krajuska@gmail.com",
+      "name": "Denise",
+      "id": 8
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "matheus@gmail.com",
+      "name": "Matheus",
+      "id": 9
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "eduarda.sousa@outlook.com",
+      "name": "Alfredo",
+      "id": 10
+    },
+    {
+      "status": 1,
+      "phone": "1111111111",
+      "cpf": "89147930012",
+      "email": "pedro.krajuska@gmail.com",
+      "name": "Pedro",
+      "id": 11
+    }
+  ]
+}
