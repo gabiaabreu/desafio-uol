@@ -35,9 +35,7 @@ export default function UserCard(user: UserType) {
         <div className={styles.status}>
           <p>{user.status}</p>
         </div>
-        <Link to={`/edit/${user.id}`} style={{ textDecoration: "none" }}>
-          <Button text="Editar" variant="primary"></Button>
-        </Link>
+        <Button text="Editar" variant="primary" styleProps={{ maxWidth: '110px' }} linkTo={`/edit/${user.id}`} />
         <IconButton color="primary" onClick={deleteHandler} style={{ backgroundColor: 'transparent' }} >
           <DeleteOutlineIcon />
         </IconButton>

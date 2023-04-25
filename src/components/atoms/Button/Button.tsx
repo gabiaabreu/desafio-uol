@@ -12,9 +12,11 @@ interface ButtonProps {
   text: string;
   onPress?: () => void;
   type?: string;
+  styleProps?: React.CSSProperties;
+  linkTo?: string;
 }
 
-export default function Button({ variant, text, onPress, type }: ButtonProps) {
+export default function Button({ variant, text, onPress, type, styleProps, linkTo }: ButtonProps) {
   const theme = createTheme({
     palette: {
       primary: {
@@ -36,8 +38,9 @@ export default function Button({ variant, text, onPress, type }: ButtonProps) {
         color={"primary"}
         onClick={onPress}
         type={type === "submit" ? "submit" : "reset"}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", ...styleProps }}
         disableElevation
+        href={linkTo}
       >
         {text}
       </MUIButton>

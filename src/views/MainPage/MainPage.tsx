@@ -1,6 +1,5 @@
 import { IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "../../components/atoms/Button";
 import UserCard from "../../components/molecules/UserCard";
 import { getAllUsers } from "../../services";
@@ -12,6 +11,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 export default function MainPage() {
   const [usersList, setUsersList] = useState<UserType[]>([]);
   const [page, setPage] = useState(1);
+
+  const isLastPage = usersList.length < 5;
 
   useEffect(() => {
     getAllUsers(page).then((data: UserType[]) => {
@@ -40,11 +41,7 @@ export default function MainPage() {
               Escolha um cliente para visualizar os detalhes
             </p>
           </div>
-          <div className={styles.button}>
-            <Link to={"/newuser"} style={{ textDecoration: "none" }}>
-              <Button text="Novo cliente" variant="secondary" />
-            </Link>
-          </div>
+          <Button text="Novo cliente" variant="secondary" linkTo="/newuser" styleProps={{ minWidth: '130px' }} />
         </div>
         {usersList?.map((user: UserType) => (
           <UserCard key={user.id} {...user} />
@@ -56,7 +53,7 @@ export default function MainPage() {
           <IconButton onClick={() => previousPage()} disabled={page === 1}>
             <ChevronLeftIcon />
           </IconButton>
-          <IconButton onClick={() => nextPage()} >
+          <IconButton onClick={() => nextPage()} disabled={isLastPage} >
             <ChevronRightIcon />
           </IconButton>
         </div>
