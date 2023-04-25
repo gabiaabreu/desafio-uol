@@ -17,7 +17,7 @@ This is a work in progress, so I'll be adding new features in the future and imp
 
 For dependencies:
 ```
-npm i
+npm install
 ```
 Running JSON server:
 ```
