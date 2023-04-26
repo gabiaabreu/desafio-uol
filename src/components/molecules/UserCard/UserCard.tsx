@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../UserCard/UserCard.module.css";
 import { UserType } from "../../../types";
 import Button from "../../atoms/Button";
-import { Link } from "react-router-dom";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteUser } from "../../../services";
 import IconButton from "@mui/material/IconButton";

@@ -3,7 +3,13 @@ import { UserType } from "../types";
 
 const urlApi = "http://localhost:3000/users";
 
-export function getAllUsers(page: number) {
+export function getAllUsers() {
+  return axios.get(urlApi).then((response) => {
+    return response.data;
+  });
+}
+
+export function getUsersByPage(page: number) {
   return axios.get(urlApi + `?_page=${page}&_limit=5`).then((response) => {
     return response.data;
   });
