@@ -4,5 +4,5 @@ export interface UserType {
     email: string,
     cpf: string,
     phone: string,
-    status: number
+    status: string,
 }

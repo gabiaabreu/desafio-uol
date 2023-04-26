@@ -16,7 +16,14 @@ interface ButtonProps {
   linkTo?: string;
 }
 
-export default function Button({ variant, text, onPress, type, styleProps, linkTo }: ButtonProps) {
+export default function Button({
+  variant,
+  text,
+  onPress,
+  type,
+  styleProps,
+  linkTo,
+}: ButtonProps) {
   const theme = createTheme({
     palette: {
       primary: {

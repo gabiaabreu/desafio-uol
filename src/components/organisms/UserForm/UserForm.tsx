@@ -39,7 +39,7 @@ export default function UserForm({
       .min(10, "Telefone deve conter entre 10 e 11 caracteres.")
       .max(11)
       .required(),
-    status: yup.number().required(),
+    status: yup.string().required(),
   });
 
   const {

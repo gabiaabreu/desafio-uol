@@ -6,6 +6,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteUser } from "../../../services";
 import IconButton from "@mui/material/IconButton";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import StatusIcon from "../../atoms/StatusIcon/StatusIcon";
 
 export default function UserCard(user: UserType) {
   const deleteHandler = () => {
@@ -32,10 +33,20 @@ export default function UserCard(user: UserType) {
           <p>{user.phone}</p>
         </div>
         <div className={styles.status}>
-          <p>{user.status}</p>
+          <StatusIcon status={user.status} />
         </div>
-        <Button text="Editar" variant="primary" styleProps={{ maxWidth: '110px' }} linkTo={`/edit/${user.id}`} />
-        <IconButton color="primary" onClick={deleteHandler} style={{ backgroundColor: 'transparent', maxWidth: '30px' }} disableRipple >
+        <Button
+          text="Editar"
+          variant="primary"
+          styleProps={{ maxWidth: "110px" }}
+          linkTo={`/edit/${user.id}`}
+        />
+        <IconButton
+          color="primary"
+          onClick={deleteHandler}
+          style={{ backgroundColor: "transparent", maxWidth: "30px" }}
+          disableRipple
+        >
           <DeleteOutlineIcon />
         </IconButton>
       </div>
