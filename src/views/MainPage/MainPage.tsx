@@ -31,6 +31,12 @@ export default function MainPage() {
     });
   }, [page]);
 
+  const noUsersLeft = pageList.length === 0;
+
+  useEffect(() => {
+    !isLoading && noUsersLeft && previousPage();
+  }, [noUsersLeft]);
+
   const deleteHandler = (id: string) => {
     deleteUser(id);
     setTriggerRefresh(true);
