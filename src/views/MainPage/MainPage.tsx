@@ -15,11 +15,14 @@ export default function MainPage() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [triggerRefresh, setTriggerRefresh] = useState(false);
+
   useEffect(() => {
     getUsersByPage(page).then((data: UserType[]) => {
       setPageList(data);
+      setTriggerRefresh(false);
     });
-  }, [page, pageList]);
+  }, [page, triggerRefresh]);
 
   useEffect(() => {
     getAllUsers().then((data: UserType[]) => {
@@ -30,6 +33,7 @@ export default function MainPage() {
 
   const deleteHandler = (id: string) => {
     deleteUser(id);
+    setTriggerRefresh(true);
   };
 
   function nextPage() {
