@@ -6,6 +6,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
+import { VariantStyles } from "../../atoms/Button/Button";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
@@ -51,7 +52,7 @@ export default function UserForm({
   });
 
   console.log(previousValues);
-  console.log('nome: ', userInfo?.name);
+  console.log("nome: ", userInfo?.name);
 
   return (
     <div className={styles.container}>
@@ -81,7 +82,13 @@ export default function UserForm({
           defaultValue={userInfo?.email}
         />
         <p>{errors.email?.message as string}</p>
-        <input type="text" placeholder="CPF" {...register("cpf")} required defaultValue={userInfo?.cpf} />
+        <input
+          type="text"
+          placeholder="CPF"
+          {...register("cpf")}
+          required
+          defaultValue={userInfo?.cpf}
+        />
         <p>{errors.cpf?.message as string}</p>
         <input
           type="text"
@@ -91,15 +98,27 @@ export default function UserForm({
           defaultValue={userInfo?.phone}
         />
         <p>{errors.phone?.message as string}</p>
-        <select {...register("status")} required defaultValue={userInfo?.status}>
+        <select
+          {...register("status")}
+          required
+          defaultValue={userInfo?.status}
+        >
           <option value={1}>Ativo</option>
           <option value={2}>Inativo</option>
           <option value={3}>Aguardando ativação</option>
           <option value={4}>Desativado</option>
         </select>
         <div className={styles.buttons}>
-          <Button variant="secondary" text={previousValues ? "Editar" : "Cadastrar"} type="submit" />
-          <Button variant="primary" text="Voltar" onPress={handleBackPress} />
+          <Button
+            variant={VariantStyles.SECONDARY}
+            text={previousValues ? "Editar" : "Cadastrar"}
+            type="submit"
+          />
+          <Button
+            variant={VariantStyles.PRIMARY}
+            text="Voltar"
+            onPress={handleBackPress}
+          />
         </div>
       </form>
     </div>

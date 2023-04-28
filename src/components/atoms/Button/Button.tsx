@@ -2,13 +2,13 @@ import React from "react";
 import { Button as MUIButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-enum VariantStyles {
+export enum VariantStyles {
   PRIMARY = "primary",
   SECONDARY = "secondary",
 }
 
 interface ButtonProps {
-  variant: string;
+  variant?: string;
   text: string;
   onPress?: () => void;
   type?: string;

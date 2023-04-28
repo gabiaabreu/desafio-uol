@@ -8,6 +8,7 @@ import styles from "../MainPage/MainPage.module.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LoadingSkeleton from "../../components/atoms/LoadingSkeleton/LoadingSkeleton";
+import { VariantStyles } from "../../components/atoms/Button/Button";
 
 export default function MainPage() {
   const [pageList, setPageList] = useState<UserType[]>([]);
@@ -68,7 +69,7 @@ export default function MainPage() {
             </div>
             <Button
               text="Novo cliente"
-              variant="secondary"
+              variant={VariantStyles.SECONDARY}
               linkTo="/newuser"
               styleProps={{ minWidth: "130px" }}
             />
