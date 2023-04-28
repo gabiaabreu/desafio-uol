@@ -24,7 +24,7 @@ export function getUserById(id: string) {
 
 export function postUser(user: UserType) {
   const postUser = {
-    ...user
+    ...user,
   };
   return axios.post(urlApi, postUser).then((response) => {
     return response.data;
@@ -38,7 +38,5 @@ export function editUser(id: string, user: UserType) {
 }
 
 export function deleteUser(id: string) {
-  return axios.delete(`${urlApi}/${id}`).then((response) => {
-    return response.data;
-  });
+  return axios.delete(`${urlApi}/${id}`);
 }
