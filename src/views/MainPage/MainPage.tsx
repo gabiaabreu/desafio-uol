@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Button from "../../components/atoms/Button";
 import UserCard from "../../components/molecules/UserCard";
@@ -6,6 +6,7 @@ import { deleteUser, getAllUsers, getUsersByPage } from "../../services";
 import { UserType } from "../../types";
 import styles from "../MainPage/MainPage.module.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CloseIcon from "@mui/icons-material/Close";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LoadingSkeleton from "../../components/atoms/LoadingSkeleton/LoadingSkeleton";
 import { VariantStyles } from "../../components/atoms/Button/Button";
@@ -15,6 +16,7 @@ export default function MainPage() {
   const [usersList, setUsersList] = useState<UserType[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [toggleSnackbar, setToggleSnackbar] = useState(false);
 
   const [triggerRefresh, setTriggerRefresh] = useState(false);
 
@@ -41,6 +43,7 @@ export default function MainPage() {
   const deleteHandler = (id: string) => {
     deleteUser(id);
     setTriggerRefresh(true);
+    setToggleSnackbar(true);
   };
 
   function nextPage() {
@@ -60,6 +63,23 @@ export default function MainPage() {
         <LoadingSkeleton />
       ) : (
         <div className={styles.content}>
+          <Snackbar
+            open={toggleSnackbar}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            onClose={() => setToggleSnackbar(false)}
+            message="Usuário excluído com sucesso"
+            action={
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={() => setToggleSnackbar(false)}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            }
+            autoHideDuration={4000}
+          />
           <div className={styles.usersContent}>
             <div className={styles.titleText}>
               <p className={styles.usersTitle}>Listagem de usuários</p>
