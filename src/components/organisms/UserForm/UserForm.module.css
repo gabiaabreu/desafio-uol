@@ -1,59 +1,64 @@
 .container {
-    width: 75vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .titleText {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .usersTitle {
-    font-size: 20px;
-    font-weight: bold;
-    padding-top: 10px;
-    color: #47525e;
-  }
-  
-  .usersText {
-    font-size: 18px;
-    padding-top: 10px;
-    padding-bottom: 5vh;
-    color: #666666;
-  }
-  
-  .forms {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input,
-  select {
-    margin: 10px;
-    margin-left: 0;
-    padding: 10px;
-    border: 1px solid #8492a6;
-    border-radius: 5px;
-  }
-  
-  input {
-    width: 240px;
-    height: 30px;
-  }
-  
-  select {
-    width: 264px;
-    height: 50px;
-  }
-  
-  .buttons {
-      width: 280px;
-      margin-top: 5vh;
-      margin-bottom: 10vh;
-      display: flex;
-      justify-content: space-between;
-  }
+  width: 75vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.titleText {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.usersTitle {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 10px;
+  color: #47525e;
+}
+
+.usersText {
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 5vh;
+  color: #666666;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  max-width: 280px;
+}
+
+input,
+select {
+  margin: 10px;
+  margin-left: 0;
+  padding: 10px;
+  border: 1px solid #8492a6;
+  border-radius: 5px;
+}
+
+input {
+  width: 240px;
+  height: 30px;
+}
+
+select {
+  width: 264px;
+  height: 50px;
+}
+
+.buttons {
+  width: 280px;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.errorMessage {
+  padding-bottom: 15px;
+}

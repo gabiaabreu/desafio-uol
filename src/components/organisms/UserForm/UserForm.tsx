@@ -7,12 +7,20 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
 import { VariantStyles } from "../../atoms/Button/Button";
+import { MenuItem, TextField } from "@mui/material";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
   id?: string;
   previousValues?: UserType;
 }
+
+const statusDict = [
+  { value: "1", label: "Ativo" },
+  { value: "2", label: "Inativo" },
+  { value: "3", label: "Aguardando ativação" },
+  { value: "4", label: "Desativado" },
+];
 
 export default function UserForm({
   onSubmitHandler,
@@ -26,20 +34,35 @@ export default function UserForm({
   };
 
   const [userInfo, setUserInfo] = useState<UserType>();
+  const [name, setName] = useState(userInfo?.name);
+  const [email, setEmail] = useState(userInfo?.email);
+  const [cpf, setCpf] = useState(userInfo?.cpf);
+  const [phone, setPhone] = useState(userInfo?.phone);
+
+  console.log(name);
+
+  console.log(userInfo);
 
   useEffect(() => {
     previousValues && setUserInfo(previousValues);
-  }, [previousValues]);
+    setName(userInfo?.name);
+    setEmail(userInfo?.email);
+    setCpf(userInfo?.cpf);
+    setPhone(userInfo?.phone);
+  }, [previousValues, userInfo]);
 
   const userSchema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
-    cpf: yup.string().length(11).required("CPF é obrigatório!"),
+    name: yup.string().required("Nome é obrigatório!"),
+    email: yup.string().email().required("E-mail é obrigatório!"),
+    cpf: yup
+      .string()
+      .length(11, "Insira um CPF válido")
+      .required("CPF é obrigatório!"),
     phone: yup
       .string()
       .min(10, "Telefone deve conter entre 10 e 11 caracteres.")
-      .max(11)
-      .required(),
+      .max(11, "Telefone deve conter entre 10 e 11 caracteres.")
+      .required("Telefone é obrigatório!"),
     status: yup.string().required(),
   });
 
@@ -51,8 +74,8 @@ export default function UserForm({
     resolver: yupResolver(userSchema),
   });
 
-  console.log(previousValues);
-  console.log("nome: ", userInfo?.name);
+  // console.log(previousValues);
+  // console.log("nome: ", userInfo?.name);
 
   return (
     <div className={styles.container}>
@@ -66,58 +89,74 @@ export default function UserForm({
         </p>
       </div>
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
-        <input
-          type="text"
-          placeholder={previousValues ? previousValues.name : "Nome"}
+        <TextField
+          id="outlined-basic"
+          label={"Nome"}
+          variant="outlined"
           {...register("name")}
-          required
-          defaultValue={userInfo?.name}
+          value={name ?? ""}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setName(event.target.value)
+          }
         />
-        <p>{errors.name?.message as string}</p>
-        <input
+        <p className={styles.errorMessage}>{errors.name?.message as string}</p>
+        <TextField
           type="email"
-          placeholder="E-mail"
+          id="outlined-basic"
+          label={"E-mail"}
+          variant="outlined"
           {...register("email")}
-          required
-          defaultValue={userInfo?.email}
+          value={email ?? ""}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(event.target.value)
+          }
         />
-        <p>{errors.email?.message as string}</p>
-        <input
-          type="text"
-          placeholder="CPF"
+        <p className={styles.errorMessage}>{errors.email?.message as string}</p>
+        <TextField
+          id="outlined-basic"
+          label={"CPF"}
+          variant="outlined"
           {...register("cpf")}
-          required
-          defaultValue={userInfo?.cpf}
+          value={cpf ?? ""}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setCpf(event.target.value)
+          }
         />
-        <p>{errors.cpf?.message as string}</p>
-        <input
-          type="text"
-          placeholder="Telefone"
+        <p className={styles.errorMessage}>{errors.cpf?.message as string}</p>
+        <TextField
+          id="outlined-basic"
+          label={"Telefone"}
+          variant="outlined"
           {...register("phone")}
-          required
-          defaultValue={userInfo?.phone}
+          value={phone ?? ""}
         />
-        <p>{errors.phone?.message as string}</p>
-        <select
+        <p className={styles.errorMessage}>{errors.phone?.message as string}</p>
+        <TextField
+          id="outlined-basic"
+          select
+          label={"Status"}
+          variant="outlined"
           {...register("status")}
-          required
-          defaultValue={userInfo?.status}
+          defaultValue={previousValues?.status ?? "1"}
         >
-          <option value={1}>Ativo</option>
-          <option value={2}>Inativo</option>
-          <option value={3}>Aguardando ativação</option>
-          <option value={4}>Desativado</option>
-        </select>
+          {statusDict.map((status) => (
+            <MenuItem key={status.value} value={status.value}>
+              {status.label}
+            </MenuItem>
+          ))}
+        </TextField>
         <div className={styles.buttons}>
           <Button
             variant={VariantStyles.SECONDARY}
-            text={previousValues ? "Editar" : "Cadastrar"}
+            text={previousValues ? "Editar" : "Criar"}
             type="submit"
+            styleProps={{ width: "100px", marginRight: "15px" }}
           />
           <Button
             variant={VariantStyles.PRIMARY}
             text="Voltar"
             onPress={handleBackPress}
+            styleProps={{ width: "100px" }}
           />
         </div>
       </form>
