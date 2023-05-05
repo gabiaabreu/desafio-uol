@@ -11,7 +11,6 @@ import { MenuItem, TextField } from "@mui/material";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
-  id?: string;
   previousValues?: UserType;
 }
 
@@ -24,7 +23,6 @@ const statusDict = [
 
 export default function UserForm({
   onSubmitHandler,
-  id,
   previousValues,
 }: UserFormProps) {
   const navigate = useNavigate();
@@ -39,12 +37,11 @@ export default function UserForm({
   const [cpf, setCpf] = useState(userInfo?.cpf);
   const [phone, setPhone] = useState(userInfo?.phone);
 
-  console.log(name);
-
   console.log(userInfo);
 
   useEffect(() => {
     previousValues && setUserInfo(previousValues);
+    reset(userInfo);
     setName(userInfo?.name);
     setEmail(userInfo?.email);
     setCpf(userInfo?.cpf);
@@ -70,12 +67,10 @@ export default function UserForm({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(userSchema),
   });
-
-  // console.log(previousValues);
-  // console.log("nome: ", userInfo?.name);
 
   return (
     <div className={styles.container}>

@@ -11,9 +11,10 @@ export default function EditUser() {
   const [user, setUser] = useState<UserType>();
 
   useEffect(() => {
-    id && getUserById(id).then((data) => {
-      setUser(data);
-    });
+    id &&
+      getUserById(id).then((data) => {
+        setUser(data);
+      });
   }, []);
 
   const onSubmitHandler = (data: FieldValues) => {
@@ -21,5 +22,5 @@ export default function EditUser() {
     editUser(id as string, data as UserType);
   };
 
-  return <UserForm onSubmitHandler={onSubmitHandler} id={id} previousValues={user} />
+  return <UserForm onSubmitHandler={onSubmitHandler} previousValues={user} />;
 }
