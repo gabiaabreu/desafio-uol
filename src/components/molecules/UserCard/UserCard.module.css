@@ -21,3 +21,7 @@
 p {
     color: #666666;
 }
+
+.boldText {
+    font-weight: 500;
+}

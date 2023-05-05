@@ -33,11 +33,11 @@ export default function UserCard({ user, deleteHandler }: UserCardProps) {
     <ThemeProvider theme={theme}>
       <div className={styles.card}>
         <div className={styles.nameEmail}>
-          <p>{user.name}</p>
+          <p className={styles.boldText}>{user.name}</p>
           <p>{user.email}</p>
         </div>
         <div className={styles.cpfPhone}>
-          <p>{user.cpf}</p>
+          <p className={styles.boldText}>{user.cpf}</p>
           <p>{user.phone}</p>
         </div>
         <div className={styles.status}>
