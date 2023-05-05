@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
 import { VariantStyles } from "../../atoms/Button/Button";
-import { MenuItem, TextField } from "@mui/material";
+import { IconButton, MenuItem, Snackbar, TextField } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
@@ -26,6 +27,8 @@ export default function UserForm({
   previousValues,
 }: UserFormProps) {
   const navigate = useNavigate();
+
+  const [toggleSnackbar, setToggleSnackbar] = useState(false);
 
   const handleBackPress = () => {
     navigate(-1);
@@ -83,6 +86,27 @@ export default function UserForm({
           {previousValues ? "editar o usuário:" : "cadastrar um novo usuário:"}
         </p>
       </div>
+      <Snackbar
+        open={toggleSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        onClose={() => setToggleSnackbar(false)}
+        message={
+          previousValues
+            ? "Usuário editado com sucesso"
+            : "Usuário criado com sucesso"
+        }
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={() => setToggleSnackbar(false)}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+        autoHideDuration={4000}
+      />
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
         <TextField
           id="outlined-basic"
@@ -124,6 +148,9 @@ export default function UserForm({
           variant="outlined"
           {...register("phone")}
           value={phone ?? ""}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setPhone(event.target.value)
+          }
         />
         <p className={styles.errorMessage}>{errors.phone?.message as string}</p>
         <TextField
@@ -146,6 +173,7 @@ export default function UserForm({
             text={previousValues ? "Editar" : "Criar"}
             type="submit"
             styleProps={{ width: "100px", marginRight: "15px" }}
+            onPress={() => setToggleSnackbar(true)}
           />
           <Button
             variant={VariantStyles.PRIMARY}
