@@ -44,16 +44,15 @@ export default function UserForm({
   });
 
   type fieldDataType = {
-    id: string,
     value: string;
     translation: string;
   };
 
   const fieldData: fieldDataType[] = [
-    { id: "1", value: "name", translation: "Nome" },
-    { id: "2", value: "email", translation: "E-mail" },
-    { id: "3", value: "cpf", translation: "CPF" },
-    { id: "4", value: "phone", translation: "Telefone" },
+    { value: "name", translation: "Nome" },
+    { value: "email", translation: "E-mail" },
+    { value: "cpf", translation: "CPF" },
+    { value: "phone", translation: "Telefone" },
   ];
 
   console.log(userInfo);
@@ -132,7 +131,7 @@ export default function UserForm({
       />
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
         {fieldData.map((field) => (
-          <React.Fragment key={field.id}>
+          <React.Fragment key={field.value}>
             <TextField
               id="outlined-basic"
               label={field.translation}
