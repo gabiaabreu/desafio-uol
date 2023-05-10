@@ -34,22 +34,24 @@ export default function UserForm({
     navigate(-1);
   };
 
-  const [userInfo, setUserInfo] = useState<UserType>();
-  const [name, setName] = useState(userInfo?.name);
-  const [email, setEmail] = useState(userInfo?.email);
-  const [cpf, setCpf] = useState(userInfo?.cpf);
-  const [phone, setPhone] = useState(userInfo?.phone);
+  const [userInfo, setUserInfo] = useState<UserType>({
+    id: "",
+    name: "",
+    email: "",
+    cpf: "",
+    phone: "",
+    status: "",
+  });
 
   console.log(userInfo);
 
   useEffect(() => {
     previousValues && setUserInfo(previousValues);
-    reset(userInfo);
-    setName(userInfo?.name);
-    setEmail(userInfo?.email);
-    setCpf(userInfo?.cpf);
-    setPhone(userInfo?.phone);
-  }, [previousValues, userInfo]);
+  }, [previousValues]);
+
+  useEffect(() => {
+    previousValues && reset(userInfo);
+  }, [userInfo]);
 
   const userSchema = yup.object().shape({
     name: yup.string().required("Nome é obrigatório!"),
@@ -74,6 +76,14 @@ export default function UserForm({
   } = useForm({
     resolver: yupResolver(userSchema),
   });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserInfo(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
 
   return (
     <div className={styles.container}>
@@ -113,10 +123,8 @@ export default function UserForm({
           label={"Nome"}
           variant="outlined"
           {...register("name")}
-          value={name ?? ""}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setName(event.target.value)
-          }
+          value={userInfo.name}
+          onChange={handleChange}
         />
         <p className={styles.errorMessage}>{errors.name?.message as string}</p>
         <TextField
@@ -125,10 +133,8 @@ export default function UserForm({
           label={"E-mail"}
           variant="outlined"
           {...register("email")}
-          value={email ?? ""}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
-          }
+          value={userInfo.email}
+          onChange={handleChange}
         />
         <p className={styles.errorMessage}>{errors.email?.message as string}</p>
         <TextField
@@ -136,10 +142,8 @@ export default function UserForm({
           label={"CPF"}
           variant="outlined"
           {...register("cpf")}
-          value={cpf ?? ""}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setCpf(event.target.value)
-          }
+          value={userInfo.cpf}
+          onChange={handleChange}
         />
         <p className={styles.errorMessage}>{errors.cpf?.message as string}</p>
         <TextField
@@ -147,10 +151,8 @@ export default function UserForm({
           label={"Telefone"}
           variant="outlined"
           {...register("phone")}
-          value={phone ?? ""}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setPhone(event.target.value)
-          }
+          value={userInfo.phone}
+          onChange={handleChange}
         />
         <p className={styles.errorMessage}>{errors.phone?.message as string}</p>
         <TextField
