@@ -43,6 +43,19 @@ export default function UserForm({
     status: "",
   });
 
+  type fieldDataType = {
+    id: string,
+    value: string;
+    translation: string;
+  };
+
+  const fieldData: fieldDataType[] = [
+    { id: "1", value: "name", translation: "Nome" },
+    { id: "2", value: "email", translation: "E-mail" },
+    { id: "3", value: "cpf", translation: "CPF" },
+    { id: "4", value: "phone", translation: "Telefone" },
+  ];
+
   console.log(userInfo);
 
   useEffect(() => {
@@ -79,11 +92,11 @@ export default function UserForm({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserInfo(prevState => ({
+    setUserInfo((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   return (
     <div className={styles.container}>
@@ -118,43 +131,21 @@ export default function UserForm({
         autoHideDuration={4000}
       />
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
-        <TextField
-          id="outlined-basic"
-          label={"Nome"}
-          variant="outlined"
-          {...register("name")}
-          value={userInfo.name}
-          onChange={handleChange}
-        />
-        <p className={styles.errorMessage}>{errors.name?.message as string}</p>
-        <TextField
-          type="email"
-          id="outlined-basic"
-          label={"E-mail"}
-          variant="outlined"
-          {...register("email")}
-          value={userInfo.email}
-          onChange={handleChange}
-        />
-        <p className={styles.errorMessage}>{errors.email?.message as string}</p>
-        <TextField
-          id="outlined-basic"
-          label={"CPF"}
-          variant="outlined"
-          {...register("cpf")}
-          value={userInfo.cpf}
-          onChange={handleChange}
-        />
-        <p className={styles.errorMessage}>{errors.cpf?.message as string}</p>
-        <TextField
-          id="outlined-basic"
-          label={"Telefone"}
-          variant="outlined"
-          {...register("phone")}
-          value={userInfo.phone}
-          onChange={handleChange}
-        />
-        <p className={styles.errorMessage}>{errors.phone?.message as string}</p>
+        {fieldData.map((field) => (
+          <React.Fragment key={field.id}>
+            <TextField
+              id="outlined-basic"
+              label={field.translation}
+              variant="outlined"
+              {...register(field.value)}
+              value={userInfo[field.value as keyof UserType]}
+              onChange={handleChange}
+            />
+            <p className={styles.errorMessage} >
+              {errors[field.value]?.message as string}
+            </p>
+          </React.Fragment>
+        ))}
         <TextField
           id="outlined-basic"
           select
