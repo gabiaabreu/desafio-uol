@@ -70,12 +70,12 @@ export default function UserForm({
     email: yup.string().email().required("E-mail é obrigatório!"),
     cpf: yup
       .string()
-      .length(11, "Insira um CPF válido")
+      .length(14, "Insira um CPF válido")
       .required("CPF é obrigatório!"),
     phone: yup
       .string()
-      .min(10, "Telefone deve conter entre 10 e 11 caracteres.")
-      .max(11, "Telefone deve conter entre 10 e 11 caracteres.")
+      .min(14, "Telefone deve conter entre 10 e 11 caracteres.")
+      .max(15, "Telefone deve conter entre 10 e 11 caracteres.")
       .required("Telefone é obrigatório!"),
     status: yup.string().required(),
   });
