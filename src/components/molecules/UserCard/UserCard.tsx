@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import StatusIcon from "../../atoms/StatusIcon/StatusIcon";
 import AlertDialog from "../../atoms/AlertDialog";
 import { VariantStyles } from "../../atoms/Button/Button";
+import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
 
 type UserCardProps = {
   user: UserType;
@@ -37,8 +38,8 @@ export default function UserCard({ user, deleteHandler }: UserCardProps) {
           <p>{user.email}</p>
         </div>
         <div className={styles.cpfPhone}>
-          <p className={styles.boldText}>{user.cpf}</p>
-          <p>{user.phone}</p>
+          <p className={styles.boldText}>{getMaskedCPF(user.cpf)}</p>
+          <p>{getMaskedPhone(user.phone)}</p>
         </div>
         <div className={styles.status}>
           <StatusIcon status={user.status} />

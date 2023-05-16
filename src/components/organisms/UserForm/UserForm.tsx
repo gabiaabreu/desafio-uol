@@ -9,6 +9,7 @@ import { UserType } from "../../../types";
 import { VariantStyles } from "../../atoms/Button/Button";
 import { IconButton, MenuItem, Snackbar, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
@@ -114,22 +115,6 @@ export default function UserForm({
       }));
     }
   };
-
-  function getMaskedCPF(value: string) {
-    value = value.replace(/\D/g, "");
-    value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, "$1.$2.$3-$4");
-    return value;
-  }
-
-  function getMaskedPhone(value: string) {
-    value = value.replace(/\D/g, "");
-    if (value.length > 11) {
-      value = value.substring(0, 11)
-    };
-    value = value.replace(/(\d{2})(\d)/, "($1) $2");
-    value = value.replace(/(\d)(\d{4})$/, "$1-$2");
-    return value;
-  }
 
   return (
     <div className={styles.container}>
