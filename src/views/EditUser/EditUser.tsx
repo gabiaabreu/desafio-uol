@@ -19,7 +19,22 @@ export default function EditUser() {
 
   const onSubmitHandler = (data: FieldValues) => {
     console.log({ data });
-    editUser(id as string, data as UserType);
+
+    const numericCpf = data.cpf.replace(/\D/g, "");
+    const numericPhone = data.phone.replace(/\D/g, "");
+
+    const formattedUser = {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      cpf: numericCpf,
+      phone: numericPhone,
+      status: data.status,
+    };
+
+    console.log(formattedUser);
+
+    editUser(id as string, formattedUser as UserType);
   };
 
   return <UserForm onSubmitHandler={onSubmitHandler} previousValues={user} />;
