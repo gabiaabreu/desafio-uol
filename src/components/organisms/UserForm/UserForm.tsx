@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
 import { VariantStyles } from "../../atoms/Button/Button";
-import { IconButton, MenuItem, Snackbar, TextField } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { MenuItem, TextField } from "@mui/material";
 import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
+import Snackbar from "../../atoms/Snackbar";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
@@ -71,12 +71,12 @@ export default function UserForm({
     email: yup.string().email().required("E-mail é obrigatório!"),
     cpf: yup
       .string()
-      .transform(value => value.replace(/\D/g, ""))
+      .transform((value) => value.replace(/\D/g, ""))
       .length(11, "Insira um CPF válido")
       .required("CPF é obrigatório!"),
     phone: yup
       .string()
-      .transform(value => value.replace(/\D/g, ""))
+      .transform((value) => value.replace(/\D/g, ""))
       .min(10, "Insira um número de telefone válido")
       .max(11, "Insira um número de telefone válido")
       .required("Telefone é obrigatório!"),
@@ -130,25 +130,13 @@ export default function UserForm({
         </p>
       </div>
       <Snackbar
-        open={toggleSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        onClose={() => setToggleSnackbar(false)}
+        isOpen={toggleSnackbar}
         message={
           previousValues
             ? "Usuário editado com sucesso"
             : "Usuário criado com sucesso"
         }
-        action={
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={() => setToggleSnackbar(false)}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        }
-        autoHideDuration={4000}
+        onClose={() => setToggleSnackbar(false)}
       />
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
         {fieldData.map((field) => (
