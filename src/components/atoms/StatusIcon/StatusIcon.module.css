@@ -1,5 +1,9 @@
 .container {
-    display: grid;
-    grid-template-columns: 0.1fr 0.7fr;
+    display: flex;
+    align-items: center;
     padding-left: 50px;
+}
+
+.text {
+    margin-left: 10px;
 }

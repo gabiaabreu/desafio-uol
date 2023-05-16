@@ -32,7 +32,7 @@ export default function StatusIcon({ status }: StatusIconProps) {
   return (
     <div className={styles.container}>
       <CircleIcon style={{ fontSize: "14px", color: `${statusInfo?.color}` }} />
-      <p>{statusInfo?.text}</p>
+      <p className={styles.text}>{statusInfo?.text}</p>
     </div>
   );
 }
