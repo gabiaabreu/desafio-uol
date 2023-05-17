@@ -10,6 +10,7 @@ import { VariantStyles } from "../../atoms/Button/Button";
 import { Alert, MenuItem, TextField } from "@mui/material";
 import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
 import Snackbar from "../../atoms/Snackbar";
+import { validateCPF } from "../../../utils/cpfValidation";
 
 interface UserFormProps {
   onSubmitHandler: (data: FieldValues) => void;
@@ -73,6 +74,9 @@ export default function UserForm({
     cpf: yup
       .string()
       .transform((value) => value.replace(/\D/g, ""))
+      .test("cpf", "Insira um CPF válido", function (value) {
+        return validateCPF(value);
+      })
       .length(11, "Insira um CPF válido")
       .required("CPF é obrigatório!"),
     phone: yup
