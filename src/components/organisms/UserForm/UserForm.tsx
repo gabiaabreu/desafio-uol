@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
 import { VariantStyles } from "../../atoms/Button/Button";
-import { MenuItem, TextField } from "@mui/material";
+import { Alert, MenuItem, TextField } from "@mui/material";
 import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
 import Snackbar from "../../atoms/Snackbar";
 
@@ -29,7 +29,8 @@ export default function UserForm({
 }: UserFormProps) {
   const navigate = useNavigate();
 
-  const [toggleSnackbar, setToggleSnackbar] = useState(false);
+  const [toggleSuccessSnackbar, setToggleSuccessSnackbar] = useState(false);
+  const [toggleFailSnackbar, setToggleFailSnackbar] = useState(false);
 
   const handleBackPress = () => {
     navigate(-1);
@@ -92,6 +93,18 @@ export default function UserForm({
     resolver: yupResolver(userSchema),
   });
 
+  function validateSchema() {
+    userSchema
+      .validate(userInfo)
+      .then(() => {
+        setToggleSuccessSnackbar(true);
+      })
+      .catch((validationError) => {
+        console.error("Validation errors:", validationError.errors);
+        setToggleFailSnackbar(true);
+      });
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -130,14 +143,26 @@ export default function UserForm({
         </p>
       </div>
       <Snackbar
-        isOpen={toggleSnackbar}
+        isOpen={toggleSuccessSnackbar}
         message={
           previousValues
             ? "Usuário editado com sucesso"
             : "Usuário criado com sucesso"
         }
-        onClose={() => setToggleSnackbar(false)}
+        onClose={() => setToggleSuccessSnackbar(false)}
       />
+      <Snackbar
+        isOpen={toggleFailSnackbar}
+        onClose={() => setToggleFailSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setToggleFailSnackbar(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Preencha os campos corretamente!
+        </Alert>
+      </Snackbar>
       <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
         {fieldData.map((field) => (
           <React.Fragment key={field.value}>
@@ -160,7 +185,7 @@ export default function UserForm({
           label={"Status"}
           variant="outlined"
           {...register("status")}
-          defaultValue={previousValues?.status ?? "1"}
+          value={previousValues?.status ?? "1"}
         >
           {statusDict.map((status) => (
             <MenuItem key={status.value} value={status.value}>
@@ -174,7 +199,7 @@ export default function UserForm({
             text={previousValues ? "Editar" : "Criar"}
             type="submit"
             styleProps={{ width: "100px", marginRight: "15px" }}
-            onPress={() => setToggleSnackbar(true)}
+            onPress={() => validateSchema()}
           />
           <Button
             variant={VariantStyles.PRIMARY}

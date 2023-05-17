@@ -5,16 +5,22 @@ import CloseIcon from "@mui/icons-material/Close";
 interface SnackbarProps {
   isOpen: boolean;
   onClose: () => void;
-  message: string;
+  message?: string;
+  children?: JSX.Element;
 }
 
-export default function Snackbar({ isOpen, onClose, message }: SnackbarProps) {
+export default function Snackbar({
+  isOpen,
+  onClose,
+  message,
+  children,
+}: SnackbarProps) {
   return (
     <MUISnackbar
       open={isOpen}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       onClose={onClose}
-      message={message}
+      message={message ?? ""}
       action={
         <IconButton
           size="small"
@@ -26,6 +32,8 @@ export default function Snackbar({ isOpen, onClose, message }: SnackbarProps) {
         </IconButton>
       }
       autoHideDuration={4000}
-    />
+    >
+      {children}
+    </MUISnackbar>
   );
 }
