@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../UserForm/UserForm.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
 import { UserType } from "../../../types";
@@ -85,7 +85,7 @@ export default function UserForm({
       .min(10, "Insira um número de telefone válido")
       .max(11, "Insira um número de telefone válido")
       .required("Telefone é obrigatório!"),
-    status: yup.string().required(),
+    status: yup.string().required("Status é obrigatório!"),
   });
 
   const {
@@ -102,7 +102,6 @@ export default function UserForm({
       .validate(userInfo)
       .then(() => {
         setToggleSuccessSnackbar(true);
-        // reset(userInfo);
       })
       .catch((validationError) => {
         console.error("Validation errors:", validationError.errors);
@@ -134,6 +133,19 @@ export default function UserForm({
         [name]: value,
       }));
     }
+  };
+
+  const submitHandler: SubmitHandler<FieldValues> = (data) => {
+    onSubmitHandler(data);
+    !previousValues &&
+      setUserInfo({
+        id: "",
+        name: "",
+        email: "",
+        cpf: "",
+        phone: "",
+        status: "",
+      });
   };
 
   return (
@@ -168,7 +180,7 @@ export default function UserForm({
           Preencha os campos corretamente!
         </Alert>
       </Snackbar>
-      <form className={styles.forms} onSubmit={handleSubmit(onSubmitHandler)}>
+      <form className={styles.forms} onSubmit={handleSubmit(submitHandler)}>
         {fieldData.map((field) => (
           <React.Fragment key={field.value}>
             <TextField
@@ -200,6 +212,9 @@ export default function UserForm({
             </MenuItem>
           ))}
         </TextField>
+        <p className={styles.errorMessage}>
+          {errors.status?.message as string}
+        </p>
         <div className={styles.buttons}>
           <Button
             variant={VariantStyles.SECONDARY}
