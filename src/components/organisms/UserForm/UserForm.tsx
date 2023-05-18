@@ -102,6 +102,7 @@ export default function UserForm({
       .validate(userInfo)
       .then(() => {
         setToggleSuccessSnackbar(true);
+        // reset(userInfo);
       })
       .catch((validationError) => {
         console.error("Validation errors:", validationError.errors);
@@ -189,7 +190,9 @@ export default function UserForm({
           label={"Status"}
           variant="outlined"
           {...register("status")}
-          value={previousValues?.status ?? "1"}
+          defaultValue={previousValues?.status ?? "1"}
+          value={userInfo.status}
+          onChange={handleChange}
         >
           {statusDict.map((status) => (
             <MenuItem key={status.value} value={status.value}>
