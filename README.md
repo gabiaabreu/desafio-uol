@@ -13,8 +13,7 @@ This is a work in progress, so I'll be adding new features in the future and imp
 ### 🎬 Screenshots
 ![image](https://github.com/gabiaabreu/desafio-uol/assets/99040538/b1ee024c-c7f4-4613-a854-eee453ad10c7)  
 -------------------------------------------------
-![image](https://github.com/gabiaabreu/desafio-uol/assets/99040538/f2ef19f1-df81-4705-9a43-d713963f6666)
-
+![image](https://github.com/gabiaabreu/desafio-uol/assets/99040538/7c31b6c3-9c02-4cd4-8bbb-74866640df46)
 
 ### 🚀 How to run 
 
