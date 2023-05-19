@@ -2,16 +2,19 @@
 
 ### 📃 Disclaimer
 
-This app (currently in progress) is my attempt at the UOLHOST front-end challenge, which you can learn more about [here](https://github.com/uolhost/test-frontEnd).
+This app (currently in progress) is my attempt at the UOLHOST front-end challenge, which you can learn more about [here](https://github.com/uolhost/test-frontEnd). The main goal was to create a website following a pre-made design and interface.
 
-The main goal is to create a website following a pre-made design and interface.
-It's a client list that displays some info and includes features like editing an existing user or adding a new one.
+It's a client list that displays some info and includes features like **editing** an existing user or **adding** a new one. I also added some extra features, like **deleting** an user. Forms have **masks** and **validation** for phone and CPF inputs. I implemented snackbar warnings, not found and empty state components.
 
-I also added some extra features, like deleting an user.
-
-The API endpoint made available by UOL was no longer accessible when I started doing it, so I mocked my own using JSON Server.
+The API endpoint made available by UOL was no longer accessible when I started doing it, so I mocked my own using **JSON Server**.
 
 This is a work in progress, so I'll be adding new features in the future and improve what I already made. I'll also add unit tests later on.
+
+### 🎬 Screenshots
+![image](https://github.com/gabiaabreu/desafio-uol/assets/99040538/b1ee024c-c7f4-4613-a854-eee453ad10c7)  
+-------------------------------------------------
+![image](https://github.com/gabiaabreu/desafio-uol/assets/99040538/f2ef19f1-df81-4705-9a43-d713963f6666)
+
 
 ### 🚀 How to run 
 
@@ -29,11 +32,10 @@ npm start
 ```
 ### 🛠 What I used: languages, libs, frameworks, tools and so on
 TypeScript  
-React  
-HTML, CSS and CSS modules  
-create-react-app  
 JSON Server, Axios  
-Material UI  
+React, create-react-app  
 React Router DOM  
 React Hook Form, Yup  
-Eslint, Prettier
+HTML, CSS and CSS modules  
+Material UI  
+Eslint, Prettier  
