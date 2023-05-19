@@ -11,11 +11,7 @@ import { Alert, MenuItem, TextField } from "@mui/material";
 import { getMaskedCPF, getMaskedPhone } from "../../../utils/masks";
 import Snackbar from "../../atoms/Snackbar";
 import { validateCPF } from "../../../utils/cpfValidation";
-
-interface UserFormProps {
-  onSubmitHandler: (data: FieldValues) => void;
-  previousValues?: UserType;
-}
+import { StatusCodeEnum } from "../../atoms/StatusIcon/StatusIcon";
 
 const statusDict = [
   { value: "1", label: "Ativo" },
@@ -24,12 +20,16 @@ const statusDict = [
   { value: "4", label: "Desativado" },
 ];
 
+interface UserFormProps {
+  onSubmitHandler: (data: FieldValues) => void;
+  previousValues?: UserType;
+}
+
 export default function UserForm({
   onSubmitHandler,
   previousValues,
 }: UserFormProps) {
   const navigate = useNavigate();
-
   const [toggleSuccessSnackbar, setToggleSuccessSnackbar] = useState(false);
   const [toggleFailSnackbar, setToggleFailSnackbar] = useState(false);
 
@@ -45,20 +45,6 @@ export default function UserForm({
     phone: "",
     status: "",
   });
-
-  type fieldDataType = {
-    value: string;
-    translation: string;
-  };
-
-  const fieldData: fieldDataType[] = [
-    { value: "name", translation: "Nome" },
-    { value: "email", translation: "E-mail" },
-    { value: "cpf", translation: "CPF" },
-    { value: "phone", translation: "Telefone" },
-  ];
-
-  console.log(userInfo);
 
   useEffect(() => {
     previousValues && setUserInfo(previousValues);
@@ -88,15 +74,6 @@ export default function UserForm({
     status: yup.string().required("Status é obrigatório!"),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(userSchema),
-  });
-
   function validateSchema() {
     userSchema
       .validate(userInfo)
@@ -108,6 +85,27 @@ export default function UserForm({
         setToggleFailSnackbar(true);
       });
   }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
+
+  type fieldDataType = {
+    value: string;
+    translation: string;
+  };
+
+  const fieldData: fieldDataType[] = [
+    { value: "name", translation: "Nome" },
+    { value: "email", translation: "E-mail" },
+    { value: "cpf", translation: "CPF" },
+    { value: "phone", translation: "Telefone" },
+  ];
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -202,7 +200,7 @@ export default function UserForm({
           label={"Status"}
           variant="outlined"
           {...register("status")}
-          defaultValue={previousValues?.status ?? "1"}
+          defaultValue={previousValues?.status ?? StatusCodeEnum.ACTIVE}
           value={userInfo.status}
           onChange={handleChange}
         >

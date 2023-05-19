@@ -7,7 +7,6 @@ import UserForm from "../../components/organisms/UserForm";
 
 export default function EditUser() {
   const { id } = useParams();
-
   const [user, setUser] = useState<UserType>();
 
   useEffect(() => {
@@ -18,8 +17,6 @@ export default function EditUser() {
   }, []);
 
   const onSubmitHandler = (data: FieldValues) => {
-    console.log({ data });
-
     const numericCpf = data.cpf.replace(/\D/g, "");
     const numericPhone = data.phone.replace(/\D/g, "");
 
@@ -31,8 +28,6 @@ export default function EditUser() {
       phone: numericPhone,
       status: data.status,
     };
-
-    console.log(formattedUser);
 
     editUser(id as string, formattedUser as UserType);
   };

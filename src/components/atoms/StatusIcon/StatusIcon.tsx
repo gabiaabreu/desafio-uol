@@ -6,7 +6,7 @@ type StatusIconProps = {
   status: string;
 };
 
-enum StatusCodeEnum {
+export enum StatusCodeEnum {
   ACTIVE = "1",
   INACTIVE = "2",
   AWAITING = "3",
