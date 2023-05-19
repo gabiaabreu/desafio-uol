@@ -18,11 +18,15 @@
     align-items: flex-start;
 }
 
-.usersContent {
+.headerContent {
     width: 100%;
     display: flex;
     align-items: center;
     margin-top: 20px;
+}
+
+.usersContent {
+    width: 100%;
 }
 
 .titleText {

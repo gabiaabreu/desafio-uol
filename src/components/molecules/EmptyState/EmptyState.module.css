@@ -1,0 +1,18 @@
+.container {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainText {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 100px;
+  color: #e29933;
+}
+
+.secondaryText {
+  color: #666666;
+}
