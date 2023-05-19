@@ -1,4 +1,4 @@
-import { IconButton, Snackbar } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Button from "../../components/atoms/Button";
 import UserCard from "../../components/molecules/UserCard";
@@ -6,10 +6,11 @@ import { deleteUser, getAllUsers, getUsersByPage } from "../../services";
 import { UserType } from "../../types";
 import styles from "../MainPage/MainPage.module.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import CloseIcon from "@mui/icons-material/Close";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LoadingSkeleton from "../../components/atoms/LoadingSkeleton/LoadingSkeleton";
 import { VariantStyles } from "../../components/atoms/Button/Button";
+import Snackbar from "../../components/atoms/Snackbar";
+import EmptyState from "../../components/molecules/EmptyState/EmptyState";
 
 export default function MainPage() {
   const [pageList, setPageList] = useState<UserType[]>([]);
@@ -17,8 +18,15 @@ export default function MainPage() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [toggleSnackbar, setToggleSnackbar] = useState(false);
-
   const [triggerRefresh, setTriggerRefresh] = useState(false);
+
+  function nextPage() {
+    setPage((currentPage) => currentPage + 1);
+  }
+
+  function previousPage() {
+    setPage((currentPage) => currentPage - 1);
+  }
 
   useEffect(() => {
     getUsersByPage(page).then((data: UserType[]) => {
@@ -34,28 +42,20 @@ export default function MainPage() {
     });
   }, [page]);
 
-  const noUsersLeft = pageList.length === 0;
+  const noUsersOnPage = pageList.length === 0;
+  const pageQty = Math.ceil(usersList?.length / 5);
+  const isLastPage = page === pageQty;
+  const noUsersFound = usersList.length === 0;
 
   useEffect(() => {
-    !isLoading && noUsersLeft && previousPage();
-  }, [noUsersLeft]);
+    !isLoading && noUsersOnPage && previousPage();
+  }, [noUsersOnPage]);
 
   const deleteHandler = (id: string) => {
     deleteUser(id);
     setTriggerRefresh(true);
     setToggleSnackbar(true);
   };
-
-  function nextPage() {
-    setPage((currentPage) => currentPage + 1);
-  }
-
-  function previousPage() {
-    setPage((currentPage) => currentPage - 1);
-  }
-
-  const pageQty = Math.ceil(usersList?.length / 5);
-  const isLastPage = page === pageQty;
 
   return (
     <div className={styles.page}>
@@ -64,23 +64,11 @@ export default function MainPage() {
       ) : (
         <div className={styles.content}>
           <Snackbar
-            open={toggleSnackbar}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            isOpen={toggleSnackbar}
             onClose={() => setToggleSnackbar(false)}
             message="Usuário excluído com sucesso"
-            action={
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={() => setToggleSnackbar(false)}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            }
-            autoHideDuration={4000}
           />
-          <div className={styles.usersContent}>
+          <div className={styles.headerContent}>
             <div className={styles.titleText}>
               <p className={styles.usersTitle}>Listagem de usuários</p>
               <p className={styles.usersText}>
@@ -94,26 +82,35 @@ export default function MainPage() {
               styleProps={{ minWidth: "130px" }}
             />
           </div>
-          {pageList?.map((user: UserType) => (
-            <UserCard
-              key={user.id}
-              user={user}
-              deleteHandler={() => deleteHandler(user.id)}
-            />
-          ))}
-          <div className={styles.lastLine}>
-            <p className={styles.usersText}>
-              {pageList.length > 1
-                ? `Exibindo ${pageList.length} clientes`
-                : `Exibindo ${pageList.length} cliente`}
-            </p>
-            <IconButton onClick={() => previousPage()} disabled={page === 1}>
-              <ChevronLeftIcon />
-            </IconButton>
-            <IconButton onClick={() => nextPage()} disabled={isLastPage}>
-              <ChevronRightIcon />
-            </IconButton>
-          </div>
+          {!noUsersFound ? (
+            <div className={styles.usersContent}>
+              {pageList?.map((user: UserType) => (
+                <UserCard
+                  key={user.id}
+                  user={user}
+                  deleteHandler={() => deleteHandler(user.id)}
+                />
+              ))}
+              <div className={styles.lastLine}>
+                <p className={styles.usersText}>
+                  {pageList.length > 1
+                    ? `Exibindo ${pageList.length} clientes`
+                    : `Exibindo ${pageList.length} cliente`}
+                </p>
+                <IconButton
+                  onClick={() => previousPage()}
+                  disabled={page === 1}
+                >
+                  <ChevronLeftIcon />
+                </IconButton>
+                <IconButton onClick={() => nextPage()} disabled={isLastPage}>
+                  <ChevronRightIcon />
+                </IconButton>
+              </div>
+            </div>
+          ) : (
+            <EmptyState />
+          )}
         </div>
       )}
     </div>
