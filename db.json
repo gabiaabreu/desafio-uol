@@ -2,91 +2,99 @@
   "users": [
     {
       "id": 1,
-      "name": "Mônica",
-      "email": "monica_sousa@gmail.com",
-      "cpf": "10575137681",
-      "phone": "34983648372",
-      "status": 1
+      "name": "Julio Sousa",
+      "email": "julio@uol.com.br",
+      "cpf": "80575972670",
+      "phone": "1255687842",
+      "status": "1"
     },
     {
       "id": 2,
-      "name": "Cebolinha",
-      "email": "cebola09@gmail.com",
-      "cpf": "23479118640",
-      "phone": "34990806617",
-      "status": 2
+      "name": "Nicole Costa",
+      "email": "nicole@yahoo.com",
+      "cpf": "25736321130",
+      "phone": "5496019097",
+      "status": "4"
     },
     {
-      "status": 1,
-      "phone": "11887772222",
-      "cpf": "25150717088",
-      "email": "maga_li@gmail.com",
-      "name": "Magali",
+      "name": "Rebeca Cavalcanti",
+      "email": "rebeca@outlook.com",
+      "cpf": "70279130708",
+      "phone": "4780885622",
+      "status": "2",
       "id": 3
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "11804710083",
-      "email": "te@gmail.com",
-      "name": "Teste",
+      "name": "Lucas Castro",
+      "email": "lucas@gmail.com",
+      "cpf": "18755304796",
+      "phone": "1275908918",
+      "status": "1",
       "id": 4
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "gabi@gmail.com",
-      "name": "Alfredo",
+      "name": "Luiz Barbosa",
+      "email": "luiz@live.com",
+      "cpf": "62419628764",
+      "phone": "2120724908",
+      "status": "3",
       "id": 5
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "eduarda.sousa@outlook.com",
-      "name": "Eduarda",
+      "name": "Larissa Ribeiro",
+      "email": "larissa@gmail.com",
+      "cpf": "97600101351",
+      "phone": "1636885771",
+      "status": "1",
       "id": 6
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "denisedobairro@limoeiro.com",
-      "name": "Denise",
+      "name": "Douglas Melo",
+      "email": "douglas@outlook.com",
+      "cpf": "42239419091",
+      "phone": "4391862326",
+      "status": "4",
       "id": 7
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "pedro.krajuska@gmail.com",
-      "name": "Denise",
+      "name": "Guilherme Barros",
+      "email": "guilherme@yahoo.com.br",
+      "cpf": "30750462213",
+      "phone": "6258245550",
+      "status": "3",
       "id": 8
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "matheus@gmail.com",
-      "name": "Matheus",
-      "id": 9
+      "id": 9,
+      "name": "Marisa Dias",
+      "email": "marisa@uol.com",
+      "cpf": "68809963539",
+      "phone": "1172835652",
+      "status": "2"
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "eduarda.sousa@outlook.com",
-      "name": "Alfredo",
+      "name": "Rodrigo Pereira",
+      "email": "rodrigo@uol.com.br",
+      "cpf": "62276024933",
+      "phone": "1696879586",
+      "status": "4",
       "id": 10
     },
     {
-      "status": 1,
-      "phone": "1111111111",
-      "cpf": "89147930012",
-      "email": "pedro.krajuska@gmail.com",
-      "name": "Pedro",
+      "name": "Miguel Rocha",
+      "email": "miguel@globo.com",
+      "cpf": "49259048176",
+      "phone": "8477603419",
+      "status": "1",
       "id": 11
+    },
+    {
+      "name": "Thaís Costa",
+      "email": "thais@uol.com.br",
+      "cpf": "28621364093",
+      "phone": "2162123517",
+      "status": "1",
+      "id": 12
     }
   ]
 }
