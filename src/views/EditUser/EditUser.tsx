@@ -4,6 +4,7 @@ import { FieldValues } from "react-hook-form/dist/types";
 import { editUser, getUserById } from "../../services";
 import { UserType } from "../../types";
 import UserForm from "../../components/organisms/UserForm";
+import { getUnmaskedValue } from "../../utils/masks";
 
 export default function EditUser() {
   const { id } = useParams();
@@ -17,16 +18,13 @@ export default function EditUser() {
   }, []);
 
   const onSubmitHandler = (data: FieldValues) => {
-    const numericCpf = data.cpf.replace(/\D/g, "");
-    const numericPhone = data.phone.replace(/\D/g, "");
+    const numericCpf = getUnmaskedValue(data.cpf);
+    const numericPhone = getUnmaskedValue(data.phone);
 
     const formattedUser = {
-      id: data.id,
-      name: data.name,
-      email: data.email,
       cpf: numericCpf,
       phone: numericPhone,
-      status: data.status,
+      ...data,
     };
 
     editUser(id as string, formattedUser as UserType);

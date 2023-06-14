@@ -13,3 +13,8 @@ export function getMaskedPhone(value: string) {
   value = value.replace(/(\d)(\d{4})$/, "$1-$2");
   return value;
 }
+
+export function getUnmaskedValue(value: string) {
+  const unmaskedValue = value.replace(/\D/g, "");
+  return unmaskedValue;
+}
