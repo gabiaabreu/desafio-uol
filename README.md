@@ -29,6 +29,11 @@ Running react app:
 ```
 npm start
 ```
+Testing:
+```
+npm test
+```
+
 ### 🛠 What I used: languages, libs, frameworks, tools and so on
 TypeScript  
 JSON Server, Axios  
